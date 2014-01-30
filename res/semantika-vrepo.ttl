@@ -1,0 +1,14 @@
+#
+# Sesame configuration template for a Semantika virtual RDF repository
+#
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rep: <http://www.openrdf.org/config/repository#>.
+@prefix sma: <http://www.obidea.com/semantika#>.
+
+[] a rep:Repository ;
+   rep:repositoryID "{%Repository ID|semantika-repo%}" ;
+   rdfs:label "{%Repository title|My Repository%}" ;
+   rep:repositoryImpl [
+      rep:repositoryType "sma:SemantikaVRepo" ;
+      sma:cfgpath "{%Configuration path%}"
+   ].
