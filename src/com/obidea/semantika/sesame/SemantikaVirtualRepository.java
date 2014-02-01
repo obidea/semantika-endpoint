@@ -69,7 +69,7 @@ public class SemantikaVirtualRepository implements Repository
    @Override
    public void setDataDir(File arg0)
    {
-      throw new UnsupportedOperationException("Setting data directory is not supported"); //$NON-NLS-1$
+      // NO-OP
    }
 
    @Override
