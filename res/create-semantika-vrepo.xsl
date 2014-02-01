@@ -47,7 +47,7 @@
                      <xsl:value-of select="$semantika-config.label" />
                   </th>
                   <td>
-                     <input type="text" id="cfgpath" name="Configuration path" size="48" value="file://" />
+                     <input type="text" id="cfgpath" name="Configuration path" size="48" />
                   </td>
                </tr>
                <tr>
