@@ -43,7 +43,7 @@ import org.openrdf.rio.RDFHandler;
 import org.openrdf.rio.RDFHandlerException;
 
 import com.obidea.semantika.exception.QueryException;
-import com.obidea.semantika.queryanswer.SelectQuery;
+import com.obidea.semantika.queryanswer.ISelectQuery;
 import com.obidea.semantika.queryanswer.SparqlQueryEngine;
 
 public class SemantikaRepositoryConnection extends RepositoryConnectionBase
@@ -91,7 +91,7 @@ public class SemantikaRepositoryConnection extends RepositoryConnectionBase
       validateQueryLanguage(ql);
       try {
          SparqlQueryEngine queryEngine = getRepository().getQueryEngine();
-         SelectQuery selectQuery = queryEngine.createQuery(query);
+         ISelectQuery selectQuery = queryEngine.createQuery(query);
          return new SemantikaTupleQuery(selectQuery);
       }
       catch (QueryException e) {

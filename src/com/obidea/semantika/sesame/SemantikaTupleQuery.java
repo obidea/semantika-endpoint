@@ -29,14 +29,14 @@ import org.openrdf.query.impl.AbstractQuery;
 import org.openrdf.query.impl.TupleQueryResultImpl;
 
 import com.obidea.semantika.exception.QueryException;
-import com.obidea.semantika.queryanswer.SelectQuery;
+import com.obidea.semantika.queryanswer.ISelectQuery;
 import com.obidea.semantika.queryanswer.result.IQueryResult;
 
 public class SemantikaTupleQuery extends AbstractQuery implements TupleQuery
 {
-   private SelectQuery mSelectQuery;
+   private ISelectQuery mSelectQuery;
 
-   public SemantikaTupleQuery(SelectQuery selectQuery)
+   public SemantikaTupleQuery(ISelectQuery selectQuery)
    {
       mSelectQuery = selectQuery;
    }
