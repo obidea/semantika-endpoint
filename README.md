@@ -9,7 +9,8 @@ Easy Installation
 If you are a new user of Sesame Workbench and never install one before then this guide is the best option for you.
 
 * [Download and install Tomcat 7.x](http://tomcat.apache.org/download-70.cgi) into your local machine.
-* Download and unzip the modified OpenRDF-Sesame WAR packages: [semantika-sesame-1.0.zip]
+* Download and unzip the modified OpenRDF-Sesame WAR packages:
+[semantika-sesame-1.0.zip](https://github.com/obidea/semantika-sesame/releases/download/v1.0/semantika-sesame-1.0.zip)
 * Deploy the WAR packages to "$CATALINA_HOME/webapps/" where "$CATALINA_HOME" represents the location directory of your
 Tomcat installation. In UNIX, the usual location is "/usr/share/tomcat7"
 * Run Tomcat. The web container will unpack the WAR packages and run the servlets.
@@ -22,7 +23,8 @@ Manual Installation
 
 If you have already Sesame Workbench in your system then follow this manual configuration.
 
-* Download and unzip the required files: [manual-installation.zip]
+* Download and unzip the required files:
+[manual-install.zip](https://github.com/obidea/semantika-sesame/releases/download/v1.0/manual-install.zip)
 
 **Required library placement**:
 * Place the Semantika Core library `semantika-core-x.x.jar` and Semantika Sesame library `semantika-sesame-x.x.jar`
