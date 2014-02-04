@@ -23,7 +23,7 @@ import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 
-import com.obidea.semantika.queryanswer.QueryEvaluationException;
+import com.obidea.semantika.queryanswer.QueryEngineException;
 import com.obidea.semantika.queryanswer.SparqlQueryEngine;
 
 public class SemantikaVirtualRepository implements Repository
@@ -64,7 +64,7 @@ public class SemantikaVirtualRepository implements Repository
       try {
          mQueryEngine.start();
       }
-      catch (QueryEvaluationException e) {
+      catch (QueryEngineException e) {
          throw new RepositoryException(e);
       }
    }
@@ -93,7 +93,7 @@ public class SemantikaVirtualRepository implements Repository
       try {
          mQueryEngine.stop();
       }
-      catch (QueryEvaluationException e) {
+      catch (QueryEngineException e) {
          throw new RepositoryException(e);
       }
    }
