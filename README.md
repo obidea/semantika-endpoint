@@ -37,21 +37,19 @@ directory of the openrdf-sesame webapp and "$OPENRDF_WORKBENCH" represents the l
 5. Place `create-semantika-vrepo.xsl` file in "$OPENRDF_WORKBENCH/transformations/".
 6. Go to "$OPENRDF_WORKBENCH/transformations/" and edit `create.xsl`. Add these lines below inside `<table class="dataentry">`
 section.
-```xml
-<option value="semantika-vrepo">
-   Semantika Virtual RDF Store
-</option>
-```
+  ```xml
+  <option value="semantika-vrepo">
+     Semantika Virtual RDF Store
+  </option>
+  ```
 7. Go to "$OPENRDF_WORKBENCH/locale/" and edit `messages.xsl`. Add these lines below at the end of the `<stylesheet>`
 section.
-```xml
-<!-- Semantika Fields -->
-<variable name="semantika-config.label">Configuration path</variable>
-```
-
+  ```xml
+  <!-- Semantika Fields -->
+  <variable name="semantika-config.label">Configuration path</variable>
+  ```
 8. Place `semantika-vrepo.ttl` in "$OPENRDF_WORKBENCH/WEB-INF/classes/org/openrdf/repository/config".
 Create this structure if the directories don't exist.
-
 9. Restart Tomcat.
 10. Go to address `http://localhost:8080/openrdf-workbench` and create "New repository".
 11. A new create entry "Type: Semantika Virtual RDF Store" should appear.
