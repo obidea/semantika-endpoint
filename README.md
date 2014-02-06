@@ -35,7 +35,7 @@ directory of the openrdf-sesame webapp and "$OPENRDF_WORKBENCH" represents the l
 4. In addition, you may need to place JDBC driver according to your database engine in "$OPENRDF_SESAME/WEB-INF/lib/"
 
 5. Place `create-semantika-vrepo.xsl` file in "$OPENRDF_WORKBENCH/transformations/".
-6. Go to "$OPENRDF_WORKBENCH/transformations/" and edit `create.xsl`. Add these lines below inside `<table class="dataentry">
+6. Go to "$OPENRDF_WORKBENCH/transformations/" and edit `create.xsl`. Add these lines below inside `<table class="dataentry">`
 section.
 ```xml
 <option value="semantika-vrepo">
