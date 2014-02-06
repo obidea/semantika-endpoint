@@ -1,10 +1,7 @@
-Sesame meets Semantika
-======================
+Semantika Sesame
+================
 
 Enabling Semantika SPARQL endpoint using Sesame Workbench.
-
-Check [our Wikipage](https://github.com/obidea/semantika-api/wiki) for a brief introduction.
-Need help? Join [OBDA Semantika Forum](https://groups.google.com/forum/#!forum/obda-semantika).
 
 Choose one of the installation guides below:
 
@@ -31,14 +28,12 @@ If you have already Sesame Workbench in your system then follow this manual conf
 1. Download and unzip the required files:
 [manual-install.zip](https://github.com/obidea/semantika-sesame/releases/download/v1.0/manual-install.zip)
 
-**Required library placement**:
 2. Place the Semantika Core library `semantika-core-x.x.jar` and Semantika Sesame library `semantika-sesame-x.x.jar`
 to "$OPENRDF_SESAME/WEB-INF/lib/" and "$OPENRDF_WORKBENCH/WEB-INF/lib/" where "$OPENRDF_SESAME" represents the location
 directory of the openrdf-sesame webapp and "$OPENRDF_WORKBENCH" represents the location of the openrdf-workbench webapp.
 3. Place other libraries in "$OPENRDF_SESAME/WEB-INF/lib/" only.
 4. In addition, you may need to place JDBC driver according to your database engine in "$OPENRDF_SESAME/WEB-INF/lib/"
 
-**Form stylesheets modification**:
 5. Place `create-semantika-vrepo.xsl` file in "$OPENRDF_WORKBENCH/transformations/".
 6. Go to "$OPENRDF_WORKBENCH/transformations/" and edit `create.xsl`. Add these lines below inside `<table class="dataentry">
 section.
@@ -54,10 +49,15 @@ section.
 <variable name="semantika-config.label">Configuration path</variable>
 ```
 
-**Repository config placement**:
 8. Place `semantika-vrepo.ttl` in "$OPENRDF_WORKBENCH/WEB-INF/classes/org/openrdf/repository/config".
 Create this structure if the directories don't exist.
 
 9. Restart Tomcat.
 10. Go to address `http://localhost:8080/openrdf-workbench` and create "New repository".
 11. A new create entry "Type: Semantika Virtual RDF Store" should appear.
+
+Need Help?
+----------
+
+Check [our Wikipage](https://github.com/obidea/semantika-api/wiki) for a brief introduction.
+Need more help? Join [OBDA Semantika Forum](https://groups.google.com/forum/#!forum/obda-semantika).
