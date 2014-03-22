@@ -29,7 +29,8 @@ import org.openrdf.query.impl.AbstractQuery;
 import org.openrdf.query.impl.TupleQueryResultImpl;
 
 import com.obidea.semantika.exception.QueryException;
-import com.obidea.semantika.queryanswer.ISelectQuery;
+import com.obidea.semantika.exception.SemantikaException;
+import com.obidea.semantika.queryanswer.internal.ISelectQuery;
 import com.obidea.semantika.queryanswer.result.IQueryResult;
 
 public class SemantikaTupleQuery extends AbstractQuery implements TupleQuery
@@ -50,6 +51,9 @@ public class SemantikaTupleQuery extends AbstractQuery implements TupleQuery
          return new TupleQueryResultImpl(new ArrayList<String>(result.getSelectNames()), bindingsIter);
       }
       catch (QueryException e) {
+         throw new QueryEvaluationException(e);
+      }
+      catch (SemantikaException e) {
          throw new QueryEvaluationException(e);
       }
    }

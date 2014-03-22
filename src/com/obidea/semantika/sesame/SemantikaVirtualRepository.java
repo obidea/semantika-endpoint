@@ -16,6 +16,7 @@
 package com.obidea.semantika.sesame;
 
 import java.io.File;
+import java.util.logging.Logger;
 
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.impl.ValueFactoryImpl;
@@ -29,6 +30,8 @@ import com.obidea.semantika.queryanswer.SparqlQueryEngine;
 public class SemantikaVirtualRepository implements Repository
 {
    private SparqlQueryEngine mQueryEngine;
+
+   private static final Logger LOG = Logger.getLogger(SemantikaVirtualRepository.class.toString());
 
    public SemantikaVirtualRepository(SparqlQueryEngine queryEngine)
    {
@@ -62,7 +65,10 @@ public class SemantikaVirtualRepository implements Repository
    public void initialize() throws RepositoryException
    {
       try {
-         mQueryEngine.start();
+         if (!mQueryEngine.isStarted()) {
+            LOG.info("Initializing SPARQL QueryEngine service"); //$NON-NLS-1$
+            mQueryEngine.start();
+         }
       }
       catch (QueryEngineException e) {
          throw new RepositoryException(e);
@@ -91,6 +97,7 @@ public class SemantikaVirtualRepository implements Repository
    public void shutDown() throws RepositoryException
    {
       try {
+         LOG.info("Stopping SPARQL QueryEngine service"); //$NON-NLS-1$
          mQueryEngine.stop();
       }
       catch (QueryEngineException e) {

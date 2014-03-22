@@ -15,6 +15,8 @@
  */
 package com.obidea.semantika.sesame;
 
+import java.util.logging.Logger;
+
 import info.aduna.iteration.EmptyIteration;
 
 import org.openrdf.model.Namespace;
@@ -43,11 +45,14 @@ import org.openrdf.rio.RDFHandler;
 import org.openrdf.rio.RDFHandlerException;
 
 import com.obidea.semantika.exception.QueryException;
-import com.obidea.semantika.queryanswer.ISelectQuery;
+import com.obidea.semantika.exception.SemantikaException;
 import com.obidea.semantika.queryanswer.SparqlQueryEngine;
+import com.obidea.semantika.queryanswer.internal.ISelectQuery;
 
 public class SemantikaRepositoryConnection extends RepositoryConnectionBase
 {
+   private static final Logger LOG = Logger.getLogger(SemantikaRepositoryConnection.class.toString());
+
    public SemantikaRepositoryConnection(Repository repository)
    {
       super(repository);
@@ -62,7 +67,10 @@ public class SemantikaRepositoryConnection extends RepositoryConnectionBase
    @Override
    public void begin() throws RepositoryException
    {
-      getRepository().initialize();
+      if (!getRepository().isInitialized()) {
+         LOG.info("Initializing service connection"); //$NON-NLS-1$
+         getRepository().initialize();
+      }
    }
 
    @Override
@@ -96,6 +104,9 @@ public class SemantikaRepositoryConnection extends RepositoryConnectionBase
       }
       catch (QueryException e) {
          throw new MalformedQueryException(e);
+      }
+      catch (SemantikaException e) {
+         throw new RepositoryException(e);
       }
    }
 

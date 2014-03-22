@@ -17,6 +17,7 @@ package com.obidea.semantika.sesame;
 
 import java.util.Map;
 import java.util.WeakHashMap;
+import java.util.logging.Logger;
 
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.config.RepositoryConfigException;
@@ -32,7 +33,9 @@ public class SemantikaRepositoryFactory implements RepositoryFactory
 {
    public static final String REPOSITORY_TYPE = "sma:SemantikaVRepo"; //$NON-NLS-1$
 
-   Map<RepositoryImplConfig, ApplicationManager> mAppCache = new WeakHashMap<RepositoryImplConfig, ApplicationManager>();
+   private Map<RepositoryImplConfig, ApplicationManager> mAppCache = new WeakHashMap<RepositoryImplConfig, ApplicationManager>();
+
+   private static final Logger LOG = Logger.getLogger(SemantikaRepositoryFactory.class.toString());
 
    @Override
    public RepositoryImplConfig getConfig()
@@ -70,6 +73,7 @@ public class SemantikaRepositoryFactory implements RepositoryFactory
 
    private ApplicationManager setupApplicationManager(SemantikaRepositoryConfig config) throws SemantikaException, RepositoryConfigException
    {
+      LOG.info("Initializing Semantika ApplicationManager"); //$NON-NLS-1$
       config.validate();
       String cfgPath = config.getConfigurationPath();
       ApplicationManager appManager = new ApplicationFactory().configure(cfgPath).createApplicationManager();
