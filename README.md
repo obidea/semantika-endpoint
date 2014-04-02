@@ -1,14 +1,11 @@
 Semantika Sesame
 ================
 
-Enabling Semantika SPARQL endpoint using Sesame Workbench.
+This project aims to setup a Semantika SPARQL endpoint through Sesame Workbench. The endpoint uses the underlying database system to answer SPARQL queries from users.
 
-Choose one of the installation guides below:
 
 Easy Installation
 -----------------
-
-If you are a new user of Sesame Workbench and never install one before then this guide is the best option for you.
 
 * [Download and install Tomcat 7.x](http://tomcat.apache.org/download-70.cgi) into your local machine.
 * Download and unzip the modified OpenRDF-Sesame WAR packages:
@@ -21,40 +18,39 @@ Tomcat installation. In UNIX, the usual location is "/usr/share/tomcat7"
 page appears with "Type: Semantika Virtual RDF Store" shows in the drop-down menu.
 
 
-Manual Installation
--------------------
+Creating an Endpoint
+--------------------
 
-If you have already Sesame Workbench in your system then follow this manual configuration.
+Below is an example for creating an endpoint for our [Semantika-MusicBrainz](https://github.com/obidea/semantika-musicbrainz) project.
 
-* Download and unzip the required files:
-[manual-install.zip](https://github.com/obidea/semantika-sesame/releases/download/v1.0/manual-install.zip)
-
-* Place the Semantika Core library `semantika-core-x.x.jar` and Semantika Sesame library `semantika-sesame-x.x.jar`
-to "$OPENRDF_SESAME/WEB-INF/lib/" and "$OPENRDF_WORKBENCH/WEB-INF/lib/" where "$OPENRDF_SESAME" represents the location
-directory of the openrdf-sesame webapp and "$OPENRDF_WORKBENCH" represents the location of the openrdf-workbench webapp.
-* Place other libraries in "$OPENRDF_SESAME/WEB-INF/lib/" only.
-* In addition, you may need to place JDBC driver according to your database engine in "$OPENRDF_SESAME/WEB-INF/lib/"
-
-* Place `create-semantika-vrepo.xsl` file in "$OPENRDF_WORKBENCH/transformations/".
-* Go to "$OPENRDF_WORKBENCH/transformations/" and edit `create.xsl`. Copy the lines below and paste them inside
-`<table class="dataentry">` section.
-```xml
-<option value="semantika-vrepo">
-   Semantika Virtual RDF Store
-</option>
+* To create an endpoint, you will need a configuration file that provides the application resources.
 ```
-* Go to "$OPENRDF_WORKBENCH/locale/" and edit `messages.xsl`. Copy the lines below and paste them at the end of the
-`<stylesheet>` section.
-```xml
-<!-- Semantika Fields -->
-<variable name="semantika-config.label">Configuration path</variable>
+<semantika-configuration>
+   <application-factory name="musicbrainz-endpoint">
+      <data-source>
+         <property name="connection.url">jdbc:h2:tcp://localhost/mbzdb</property>
+         <property name="connection.driver_class">org.h2.Driver</property>
+         <property name="connection.username">sa</property>
+         <property name="connection.password"></property>
+      </data-source>
+      <mapping-source resource="file:///home/user/musicbrainz/res/artist.tml.xml" strict-parsing="false"/>
+   </application-factory>
+</semantika-configuration>
 ```
-* Place `semantika-vrepo.ttl` in "$OPENRDF_WORKBENCH/WEB-INF/classes/org/openrdf/repository/config". Create the folder
-structure if the directory doesn't exist.
-* Restart Tomcat.
-* Go to address `http://localhost:8080/openrdf-workbench` using a web browser.
-* **To test the installation:** Create "New repository" and a new create entry "Type: Semantika Virtual RDF Store"
-should appear in the drop-down menu.
+Notice that the URL protocol `file://` is used to locate the mapping resource at `/home/user/musicbrainz/res/artist.tml.xml`
+
+* Complete the "New Repository" form by filling the ID, title and configuration file location.
+
+![alt tag](https://raw.githubusercontent.com/obidea/semantika-sesame/master/img/create-endpoint-1.png)
+
+* Once the endpoint was succesfully created, make a query using the "Query" menu item. The example asks for all artists that performed as a solo artist and each name.
+
+![alt tag](https://raw.githubusercontent.com/obidea/semantika-sesame/master/img/create-endpoint-2.png)
+
+* Check the returned results.
+
+![alt tag](https://raw.githubusercontent.com/obidea/semantika-sesame/master/img/create-endpoint-3.png)
+
 
 Need Help?
 ----------
