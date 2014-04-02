@@ -8,13 +8,13 @@ Easy Installation
 -----------------
 
 * [Download and install Tomcat 7.x](http://tomcat.apache.org/download-70.cgi) into your local machine.
-* Download and unzip the modified OpenRDF-Sesame WAR packages:
-[semantika-sesame-1.0.zip](https://github.com/obidea/semantika-sesame/releases/download/v1.0/semantika-sesame-1.0.zip)
+* [Download and unzip Semantika-Sesame 1.1](https://github.com/obidea/semantika-sesame/releases/download/v1.0.11/semantika-sesame-1.1_12.zip). The zip contains two WAR files, i.e., openrdf-sesame.war and openrdf-workbench.war
 * Deploy the WAR packages to "$CATALINA_HOME/webapps/" where "$CATALINA_HOME" represents the location directory of your
 Tomcat installation. In UNIX, the usual location is "/usr/share/tomcat7"
 * Run Tomcat. The web container will unpack the WAR packages and run the servlets.
 * Go to address `http://localhost:8080/openrdf-workbench` using a web browser.
-* **To test the installation:** In the workbench page, create "New repository" using the left menu. A "New Repository"
+
+**To test the installation:** In the workbench page, create "New repository" using the left menu. A "New Repository"
 page appears with "Type: Semantika Virtual RDF Store" shows in the drop-down menu.
 
 
