@@ -3,7 +3,7 @@ Semantika Sesame
 
 This project aims to setup a Semantika SPARQL endpoint through Sesame Workbench. The endpoint uses the underlying database system to answer SPARQL queries from users.
 
-Latest news: [1.1 (build 16) is available!](https://github.com/obidea/semantika-sesame/releases/tag/v1.1_16)
+Latest news: [1.1 (build 16) is available!](https://github.com/obidea/semantika-sesame/releases/tag/v1.1_16) (June 17, 2014)
 
 Easy Installation
 -----------------
