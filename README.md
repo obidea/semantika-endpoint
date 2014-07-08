@@ -3,13 +3,13 @@ Semantika Sesame
 
 This project aims to setup a Semantika SPARQL endpoint through Sesame Workbench. The endpoint uses the underlying database system to answer SPARQL queries from users.
 
-Latest news: [1.1 (build 16) is available!](https://github.com/obidea/semantika-sesame/releases/tag/v1.1_16) (June 17, 2014)
+Latest news: [1.2 (build 17) is available!](https://github.com/obidea/semantika-sesame/releases/tag/v1.2_17) (July 8, 2014)
 
 Easy Installation
 -----------------
 
 * [Download and install Tomcat 7.x](http://tomcat.apache.org/download-70.cgi) into your local machine.
-* [Download the latest release of Semantika Sesame project bundle](https://github.com/obidea/semantika-sesame/releases). The zip contains two WAR files, i.e., openrdf-sesame.war and openrdf-workbench.war
+* [Download the latest release of Semantika Sesame project bundle](https://github.com/obidea/semantika-sesame/releases). The zip contains two WAR files, i.e., `openrdf-sesame.war` and `openrdf-workbench.war`
 * Deploy the WAR packages to `$CATALINA_HOME/webapps/` where `$CATALINA_HOME` represents the location directory of your
 Tomcat installation. In UNIX, the usual location is "/usr/share/tomcat7".
 * Run Tomcat. The web container will unpack the WAR packages and run the servlets.
