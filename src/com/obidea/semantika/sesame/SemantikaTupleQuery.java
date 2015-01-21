@@ -15,8 +15,6 @@
  */
 package com.obidea.semantika.sesame;
 
-import info.aduna.iteration.CloseableIteration;
-
 import java.util.ArrayList;
 
 import org.openrdf.query.BindingSet;
@@ -28,16 +26,17 @@ import org.openrdf.query.TupleQueryResultHandlerException;
 import org.openrdf.query.impl.AbstractQuery;
 import org.openrdf.query.impl.TupleQueryResultImpl;
 
-import com.obidea.semantika.exception.QueryException;
-import com.obidea.semantika.exception.SemantikaException;
-import com.obidea.semantika.queryanswer.internal.ISelectQuery;
+import info.aduna.iteration.CloseableIteration;
+
+import com.obidea.semantika.queryanswer.exception.QueryAnswerException;
+import com.obidea.semantika.queryanswer.internal.SelectQuery;
 import com.obidea.semantika.queryanswer.result.IQueryResult;
 
 public class SemantikaTupleQuery extends AbstractQuery implements TupleQuery
 {
-   private ISelectQuery mSelectQuery;
+   private SelectQuery mSelectQuery;
 
-   public SemantikaTupleQuery(ISelectQuery selectQuery)
+   public SemantikaTupleQuery(SelectQuery selectQuery)
    {
       mSelectQuery = selectQuery;
    }
@@ -50,10 +49,7 @@ public class SemantikaTupleQuery extends AbstractQuery implements TupleQuery
          CloseableIteration<? extends BindingSet, QueryEvaluationException> bindingsIter = createBindingsIter(result);
          return new TupleQueryResultImpl(new ArrayList<String>(result.getSelectNames()), bindingsIter);
       }
-      catch (QueryException e) {
-         throw new QueryEvaluationException(e);
-      }
-      catch (SemantikaException e) {
+      catch (QueryAnswerException e) {
          throw new QueryEvaluationException(e);
       }
    }

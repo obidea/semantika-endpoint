@@ -30,7 +30,7 @@ import com.obidea.semantika.queryanswer.result.ILiteral;
 import com.obidea.semantika.queryanswer.result.IQueryResult;
 import com.obidea.semantika.queryanswer.result.IUri;
 import com.obidea.semantika.queryanswer.result.IValue;
-import com.obidea.semantika.queryanswer.result.IValueList;
+import com.obidea.semantika.queryanswer.result.IValueArray;
 import com.obidea.semantika.util.StringUtils;
 
 public class SemantikaQueryResultIteration implements CloseableIteration<BindingSet, QueryEvaluationException>
@@ -53,8 +53,8 @@ public class SemantikaQueryResultIteration implements CloseableIteration<Binding
    @Override
    public BindingSet next() throws QueryEvaluationException
    {
-      IValueList valueList = mResult.getValueList();
-      return convert(valueList);
+      IValueArray valueArray = mResult.getValueArray();
+      return convert(valueArray);
    }
 
    @Override
@@ -69,12 +69,12 @@ public class SemantikaQueryResultIteration implements CloseableIteration<Binding
       // NO-OP
    }
 
-   private BindingSet convert(IValueList valueList)
+   private BindingSet convert(IValueArray valueArray)
    {
-      List<String> selectNames = valueList.getSelectNames();
+      List<String> selectNames = valueArray.getSelectNames();
       MapBindingSet result = new MapBindingSet(selectNames.size());
       for (String name : selectNames) {
-         Value value = createValue(valueList.get(name));
+         Value value = createValue(valueArray.get(name));
          result.addBinding(name, value);
       }
       return result;

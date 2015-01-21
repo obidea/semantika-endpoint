@@ -17,8 +17,6 @@ package com.obidea.semantika.sesame;
 
 import java.util.logging.Logger;
 
-import info.aduna.iteration.EmptyIteration;
-
 import org.openrdf.model.Namespace;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
@@ -44,10 +42,11 @@ import org.openrdf.repository.base.RepositoryConnectionBase;
 import org.openrdf.rio.RDFHandler;
 import org.openrdf.rio.RDFHandlerException;
 
-import com.obidea.semantika.exception.QueryException;
-import com.obidea.semantika.exception.SemantikaException;
+import info.aduna.iteration.EmptyIteration;
+
 import com.obidea.semantika.queryanswer.SparqlQueryEngine;
-import com.obidea.semantika.queryanswer.internal.ISelectQuery;
+import com.obidea.semantika.queryanswer.exception.QueryAnswerException;
+import com.obidea.semantika.queryanswer.internal.SelectQuery;
 
 public class SemantikaRepositoryConnection extends RepositoryConnectionBase
 {
@@ -99,14 +98,11 @@ public class SemantikaRepositoryConnection extends RepositoryConnectionBase
       validateQueryLanguage(ql);
       try {
          SparqlQueryEngine queryEngine = getRepository().getQueryEngine();
-         ISelectQuery selectQuery = queryEngine.createQuery(query);
+         SelectQuery selectQuery = queryEngine.createQuery(query);
          return new SemantikaTupleQuery(selectQuery);
       }
-      catch (QueryException e) {
+      catch (QueryAnswerException e) {
          throw new MalformedQueryException(e);
-      }
-      catch (SemantikaException e) {
-         throw new RepositoryException(e);
       }
    }
 
