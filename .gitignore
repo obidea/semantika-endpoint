@@ -1,10 +1,27 @@
 *.class
-.project
-.classpath
-.DS_Store
 
 # Package Files #
 *.jar
 *.war
 *.ear
-/bin
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# Maven
+target/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# IntelliJ
+*.iws
+*.ipr
+.idea
+*.iml
+build/
+
+# MacOS
+.DS_Store
