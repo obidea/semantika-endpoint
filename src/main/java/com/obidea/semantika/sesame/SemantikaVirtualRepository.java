@@ -19,7 +19,7 @@ import java.io.File;
 import java.util.logging.Logger;
 
 import org.openrdf.model.ValueFactory;
-import org.openrdf.model.impl.ValueFactoryImpl;
+import org.openrdf.model.impl.SimpleValueFactory;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
@@ -58,7 +58,7 @@ public class SemantikaVirtualRepository implements Repository
    @Override
    public ValueFactory getValueFactory()
    {
-      return ValueFactoryImpl.getInstance();
+      return SimpleValueFactory.getInstance();
    }
 
    @Override

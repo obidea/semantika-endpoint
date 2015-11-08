@@ -24,13 +24,13 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.TupleQueryResultHandler;
 import org.openrdf.query.TupleQueryResultHandlerException;
 import org.openrdf.query.impl.AbstractQuery;
-import org.openrdf.query.impl.TupleQueryResultImpl;
-
-import info.aduna.iteration.CloseableIteration;
+import org.openrdf.query.impl.IteratingTupleQueryResult;
 
 import com.obidea.semantika.queryanswer.exception.QueryAnswerException;
 import com.obidea.semantika.queryanswer.internal.SelectQuery;
 import com.obidea.semantika.queryanswer.result.IQueryResult;
+
+import info.aduna.iteration.CloseableIteration;
 
 public class SemantikaTupleQuery extends AbstractQuery implements TupleQuery
 {
@@ -47,7 +47,7 @@ public class SemantikaTupleQuery extends AbstractQuery implements TupleQuery
       try {
          IQueryResult result = mSelectQuery.evaluate();
          CloseableIteration<? extends BindingSet, QueryEvaluationException> bindingsIter = createBindingsIter(result);
-         return new TupleQueryResultImpl(new ArrayList<String>(result.getSelectNames()), bindingsIter);
+         return new IteratingTupleQueryResult(new ArrayList<String>(result.getSelectNames()), bindingsIter);
       }
       catch (QueryAnswerException e) {
          throw new QueryEvaluationException(e);

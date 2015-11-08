@@ -19,12 +19,10 @@ import java.util.List;
 
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
-import org.openrdf.model.impl.ValueFactoryImpl;
+import org.openrdf.model.impl.SimpleValueFactory;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.impl.MapBindingSet;
-
-import info.aduna.iteration.CloseableIteration;
 
 import com.obidea.semantika.queryanswer.result.ILiteral;
 import com.obidea.semantika.queryanswer.result.IQueryResult;
@@ -33,11 +31,13 @@ import com.obidea.semantika.queryanswer.result.IValue;
 import com.obidea.semantika.queryanswer.result.IValueArray;
 import com.obidea.semantika.util.StringUtils;
 
+import info.aduna.iteration.CloseableIteration;
+
 public class SemantikaQueryResultIteration implements CloseableIteration<BindingSet, QueryEvaluationException>
 {
    private IQueryResult mResult;
 
-   private ValueFactory mValueFactory = ValueFactoryImpl.getInstance();
+   private ValueFactory mValueFactory = SimpleValueFactory.getInstance();
 
    public SemantikaQueryResultIteration(IQueryResult result)
    {
@@ -95,12 +95,12 @@ public class SemantikaQueryResultIteration implements CloseableIteration<Binding
          }
          else {
             String datatype = literal.getDatatype();
-            return mValueFactory.createLiteral(label, mValueFactory.createURI(datatype));
+            return mValueFactory.createLiteral(label, mValueFactory.createIRI(datatype));
          }
       }
       else if (value instanceof IUri) {
          IUri uri = (IUri) value;
-         return mValueFactory.createURI(uri.stringValue());
+         return mValueFactory.createIRI(uri.stringValue());
       }
       return null;
    }

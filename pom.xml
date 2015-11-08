@@ -27,12 +27,12 @@
       <dependency>
          <groupId>com.obidea.semantika</groupId>
          <artifactId>semantika-core</artifactId>
-         <version>1.7.2</version>
+         <version>1.8</version>
       </dependency>
       <dependency>
          <groupId>org.openrdf.sesame</groupId>
          <artifactId>sesame-repository-api</artifactId>
-         <version>2.8.6</version>
+         <version>4.0.0</version>
       </dependency>
    </dependencies>
 

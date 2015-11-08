@@ -17,10 +17,10 @@ package com.obidea.semantika.sesame;
 
 import java.util.logging.Logger;
 
+import org.openrdf.model.IRI;
 import org.openrdf.model.Namespace;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
-import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.query.BooleanQuery;
 import org.openrdf.query.GraphQuery;
@@ -38,17 +38,17 @@ import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
 import org.openrdf.repository.UnknownTransactionStateException;
-import org.openrdf.repository.base.RepositoryConnectionBase;
+import org.openrdf.repository.base.AbstractRepositoryConnection;
 import org.openrdf.rio.RDFHandler;
 import org.openrdf.rio.RDFHandlerException;
-
-import info.aduna.iteration.EmptyIteration;
 
 import com.obidea.semantika.queryanswer.SparqlQueryEngine;
 import com.obidea.semantika.queryanswer.exception.QueryAnswerException;
 import com.obidea.semantika.queryanswer.internal.SelectQuery;
 
-public class SemantikaRepositoryConnection extends RepositoryConnectionBase
+import info.aduna.iteration.EmptyIteration;
+
+public class SemantikaRepositoryConnection extends AbstractRepositoryConnection
 {
    private static final Logger LOG = Logger.getLogger(SemantikaRepositoryConnection.class.toString());
 
@@ -144,14 +144,14 @@ public class SemantikaRepositoryConnection extends RepositoryConnectionBase
    }
 
    @Override
-   public RepositoryResult<Statement> getStatements(Resource subj, URI pred, Value obj,
+   public RepositoryResult<Statement> getStatements(Resource subj, IRI pred, Value obj,
          boolean includeInferred, Resource... contexts) throws RepositoryException
    {
       return null;
    }
 
    @Override
-   public void exportStatements(Resource subj, URI pred, Value obj, boolean includeInferred,
+   public void exportStatements(Resource subj, IRI pred, Value obj, boolean includeInferred,
          RDFHandler handler, Resource... contexts) throws RepositoryException, RDFHandlerException
    {
       throw new UnsupportedOperationException("Update query is not supported"); //$NON-NLS-1$
@@ -212,14 +212,14 @@ public class SemantikaRepositoryConnection extends RepositoryConnectionBase
    }
 
    @Override
-   protected void addWithoutCommit(Resource subject, URI predicate, Value object,
+   protected void addWithoutCommit(Resource subject, IRI predicate, Value object,
          Resource... contexts) throws RepositoryException
    {
       // NO-OP
    }
 
    @Override
-   protected void removeWithoutCommit(Resource subject, URI predicate, Value object,
+   protected void removeWithoutCommit(Resource subject, IRI predicate, Value object,
          Resource... contexts) throws RepositoryException
    {
       // NO-OP

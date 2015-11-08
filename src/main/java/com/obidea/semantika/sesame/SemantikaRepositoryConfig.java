@@ -15,27 +15,25 @@
  */
 package com.obidea.semantika.sesame;
 
-import org.openrdf.model.Graph;
-import org.openrdf.model.Literal;
+import org.openrdf.model.IRI;
+import org.openrdf.model.Model;
 import org.openrdf.model.Resource;
-import org.openrdf.model.URI;
 import org.openrdf.model.ValueFactory;
-import org.openrdf.model.impl.ValueFactoryImpl;
-import org.openrdf.model.util.GraphUtil;
-import org.openrdf.model.util.GraphUtilException;
+import org.openrdf.model.impl.SimpleValueFactory;
+import org.openrdf.model.util.Models;
+import org.openrdf.repository.config.AbstractDelegatingRepositoryImplConfig;
 import org.openrdf.repository.config.RepositoryConfigException;
-import org.openrdf.repository.config.RepositoryImplConfigBase;
 
 import com.obidea.semantika.util.StringUtils;
 
-public class SemantikaRepositoryConfig extends RepositoryImplConfigBase
+public class SemantikaRepositoryConfig extends AbstractDelegatingRepositoryImplConfig
 {
    public static final String NAMESPACE = "http://www.obidea.com/semantika#"; //$NON-NLS-1$
 
-   private static ValueFactory sValueFactory = ValueFactoryImpl.getInstance();
+   private static ValueFactory sValueFactory =  SimpleValueFactory.getInstance();
 
    /** <tt>http://www.obidea.com/semantika#cfgpath</tt> */
-   public final static URI SEMANTIKA_CONFIG_PATH = sValueFactory.createURI(NAMESPACE + "cfgpath"); //$NON-NLS-1$
+   public final static IRI SEMANTIKA_CONFIG_PATH = sValueFactory.createIRI(NAMESPACE, "cfgpath"); //$NON-NLS-1$
 
    private String mConfigurationPath = ""; //$NON-NLS-1$
 
@@ -63,28 +61,21 @@ public class SemantikaRepositoryConfig extends RepositoryImplConfigBase
    }
 
    @Override
-   public Resource export(Graph graph)
+   public Resource export(Model model)
    {
-      Resource implNode = super.export(graph);
+      Resource implNode = super.export(model);
 
       if (!StringUtils.isEmpty(mConfigurationPath)) {
-         graph.add(implNode, SEMANTIKA_CONFIG_PATH, sValueFactory.createLiteral(mConfigurationPath));
+         model.add(implNode, SEMANTIKA_CONFIG_PATH, sValueFactory.createLiteral(mConfigurationPath));
       }
       return implNode;
    }
 
    @Override
-   public void parse(Graph graph, Resource implNode) throws RepositoryConfigException
+   public void parse(Model model, Resource implNode) throws RepositoryConfigException
    {
-      super.parse(graph, implNode);
-      try {
-         Literal configPath = GraphUtil.getOptionalObjectLiteral(graph, implNode, SEMANTIKA_CONFIG_PATH);
-         if (configPath != null) {
-            setConfigurationPath(configPath.getLabel());
-         }
-      }
-      catch (GraphUtilException e) {
-         throw new RepositoryConfigException(e);
-      }
+      super.parse(model, implNode);
+      Models.objectLiteral(model.filter(implNode, SEMANTIKA_CONFIG_PATH, null)).ifPresent(
+            resource -> setConfigurationPath(resource.getLabel()));
    }
 }
