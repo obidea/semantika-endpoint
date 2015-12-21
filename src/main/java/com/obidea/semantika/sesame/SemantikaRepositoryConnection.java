@@ -98,7 +98,7 @@ public class SemantikaRepositoryConnection extends AbstractRepositoryConnection
       validateQueryLanguage(ql);
       try {
          SparqlQueryEngine queryEngine = getRepository().getQueryEngine();
-         SelectQuery selectQuery = queryEngine.createQuery(query);
+         SelectQuery selectQuery = queryEngine.createSelectQuery(query);
          return new SemantikaTupleQuery(selectQuery);
       }
       catch (QueryAnswerException e) {
